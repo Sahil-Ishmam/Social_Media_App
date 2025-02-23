@@ -6,6 +6,8 @@ from .forms import PostForm
 from django.contrib import messages
 from . import forms
 from django.http import Http404
+from django.contrib.auth.models import User
+from django.db.models import Q
 
 from django.shortcuts import render, get_object_or_404
 
@@ -24,6 +26,38 @@ class PostList(ListView):
     template_name = 'social/index.html'
     context_object_name = 'posts'
 
+    def get_queryset(self):
+        queryset = Post.objects.all()
+        query = self.request.GET.get('q', '')
+        author = self.request.GET.get('author', '')
+        media_type = self.request.GET.get('media_type', '')
+        order = self.request.GET.get('order', '')
+
+        if query:
+            queryset = queryset.filter(Q(content__icontains=query) | Q(title__icontains=query))
+
+        if author:
+            queryset = queryset.filter(user__username=author)
+
+        if media_type:
+            if media_type == "text":
+                queryset = queryset.filter(image__isnull=True)
+            elif media_type == "image":
+                queryset = queryset.filter(image__isnull=False)
+
+        if order:
+            if order == "latest":
+                queryset = queryset.order_by('-created_at')
+            elif order == "oldest":
+                queryset = queryset.order_by('created_at')
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users'] = User.objects.all()  # Passing users for filtering
+        return context
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
@@ -35,6 +69,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         messages.add_message(self.request, messages.SUCCESS, "Post Created Successfully")
         return super().form_valid(form)
+    
 
 
 

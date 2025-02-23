@@ -8,24 +8,72 @@
 
 
 <div class="container d-flex flex-wrap justify-content-center gap-4">
-  {% for post in posts %}
-      <div class="card bg-dark text-white shadow-lg rounded-3" style="width: 20rem;">
-          <div class="card-body">
-              <h5 class="card-title text-warning">{{ post.title }}</h5>
-              <p class="card-text">
-                  <small class="text-success">Posted By: {{ post.user.username }}</small><br>
-                  <small class="text-muted">Post ID: {{ post.id }}</small><br>
-                  <small class="text-muted">Posted on: {{ post.created_at|date:"F d, Y h:i A" }}</small><br>
-                  
-                  <span class="d-block text-truncate" style="max-height: 4.5em; overflow: hidden;">
-                      {{ post.content|truncatewords:30 }}
-                  </span>
-                  
-                  <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-success fw-bold">Read more</a>
-              </p>
-          </div>
-      </div>
-  {% endfor %}
+    {% comment %} {% url 'post_list' %} {% endcomment %}
+    <form method="GET" action="#" class="mb-4">
+        <div class="row">
+            <!-- Keyword Search -->
+            <div class="col-md-4">
+                <input type="text" name="q" class="form-control" placeholder="Search by keyword..." value="{{ request.GET.q }}">
+            </div>
+
+            <!-- Filter by Author -->
+            <div class="col-md-3">
+                <select name="author" class="form-select">
+                    <option value="">Filter by Author</option>
+                    {% for user in users %}
+                        <option value="{{ user.username }}" {% if request.GET.author == user.username %}selected{% endif %}>
+                            {{ user.username }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Filter by Media Type -->
+            <div class="col-md-2">
+                <select name="media_type" class="form-select">
+                    <option value="">Media Type</option>
+                    <option value="text" {% if request.GET.media_type == "text" %}selected{% endif %}>Text</option>
+                    <option value="image" {% if request.GET.media_type == "image" %}selected{% endif %}>Image</option>
+                </select>
+            </div>
+
+            <!-- Sort Order -->
+            <div class="col-md-2">
+                <select name="order" class="form-select">
+                    <option value="">Sort By</option>
+                    <option value="latest" {% if request.GET.order == "latest" %}selected{% endif %}>Latest</option>
+                    <option value="oldest" {% if request.GET.order == "oldest" %}selected{% endif %}>Oldest</option>
+                </select>
+            </div>
+
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    {% for post in posts %}
+    <div class="card bg-dark text-white shadow-lg rounded-3" style="width: 20rem;">
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top" alt="Post Image" style="height: 200px; object-fit: cover;">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title text-warning">{{ post.title }}</h5>
+            <p class="card-text">
+                <small class="text-success">Posted By: {{ post.user.username }}</small><br>
+                <small class="text-muted">Post ID: {{ post.id }}</small><br>
+                <small class="text-muted">Posted on: {{ post.created_at|date:"F d, Y h:i A" }}</small><br>
+                
+                <span class="d-block text-truncate" style="max-height: 4.5em; overflow: hidden;">
+                    {{ post.content|truncatewords:30 }}
+                </span>
+                
+                <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-success fw-bold">Read more</a>
+            </p>
+        </div>
+    </div>
+{% endfor %}
+
 </div>
 
 

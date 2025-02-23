@@ -12,6 +12,7 @@ class PostForm(forms.ModelForm):
         labels = {
             'title':'Enter title of the post',
             'content':'Write post conetent',
+            
         }
         
 
