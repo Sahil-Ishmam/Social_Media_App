@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Delete Post {% endblock title %}
+
+
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card bg-danger text-white shadow-lg" style="width: 30rem;">
+        <div class="card-body">
+            <h5 class="card-title text-center">Delete Confirmation</h5>
+            <p class="text-center">Are you sure you want to delete the post titled <strong>"{{ object }}"</strong>?</p>
+            
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-light btn-lg">Confirm</button>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    
+{% endblock content %}

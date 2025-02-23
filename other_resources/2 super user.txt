@@ -1,0 +1,6 @@
+superuser1: ishmam
+password: ishmam
+
+
+superuser2: admin
+password: admin

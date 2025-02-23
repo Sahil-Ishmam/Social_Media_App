@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="py-3 container text-center bg-success text-white rounded-3 shadow-lg" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  All Post List
+</h1>
+
+
+<div class="container d-flex flex-wrap justify-content-center gap-4">
+  {% for post in posts %}
+      <div class="card bg-dark text-white shadow-lg rounded-3" style="width: 20rem;">
+          <div class="card-body">
+              <h5 class="card-title text-warning">{{ post.title }}</h5>
+              <p class="card-text">
+                  <small class="text-success">Posted By: {{ post.user.username }}</small><br>
+                  <small class="text-muted">Post ID: {{ post.id }}</small><br>
+                  <small class="text-muted">Posted on: {{ post.created_at|date:"F d, Y h:i A" }}</small><br>
+                  
+                  <span class="d-block text-truncate" style="max-height: 4.5em; overflow: hidden;">
+                      {{ post.content|truncatewords:30 }}
+                  </span>
+                  
+                  <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-success fw-bold">Read more</a>
+              </p>
+          </div>
+      </div>
+  {% endfor %}
+</div>
+
+
+{% endblock content %}
