@@ -48,6 +48,8 @@ Social Media App uses a number tools and technology to create it :
 - [Pipenv] - A Great Virtual Environment 
 - [Git and Github] - For Version Control
 
+## ERD for the Project
+![Alt text](./other_resources/ERD.jpg)
 
 ## Installation
 
