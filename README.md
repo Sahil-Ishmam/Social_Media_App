@@ -1,8 +1,7 @@
-
 # Social Media App
-## Author: Sahil Uddin Ishmam
-
-
+--Author
+This project is developed and maintained by **S.U Ishmam**. 
+You can reach me at [email@example.com](mailto:sahiluddinishmam@gmail.com) or find me on [LinkedIn](https://www.linkedin.com/in/sahil-uddin-ishmam-8707301a3/).
 
 
 
@@ -38,7 +37,7 @@ Before you begin, ensure you have the following installed:
 
 ## Tech
 
-Social Media App uses a number of open source projects to work properly:
+Social Media App uses a number tools and technology to create it :
 
 - [Python] - As a main language(backend)
 - [Django] - Backend (Model,View,Template)
@@ -54,8 +53,9 @@ Social Media App uses a number of open source projects to work properly:
 
 Social Media App requires [Django] to run.
 
-Install the dependencies and devDependencies and start the server.
+Install the dependencies and development Dependencies.
 ## Install Depencency 
+
 ```sh
 - TO Install Python > [ pip install python ]
 - To install pipenv > [ pip install pipenv ]
@@ -85,11 +85,15 @@ python manage.py runserver
 ```
 Visit http://127.0.0.1:8000/ in your browser to view the project.
 
-## Plugins
 
 ```sh
 127.0.0.1:8000
 ```
+## Additional Notes
+
+- This project is in its early stages, so feel free to contribute by submitting pull requests.
+- If you encounter any issues or bugs, please report them on the [issues page](https://github.com/Sahil-Ishmam/Social_Media_App//issues).
+- Make sure to keep your dependencies up to date using `pipenv update`.
 
 ## License
 
