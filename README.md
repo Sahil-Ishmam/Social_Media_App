@@ -1,7 +1,7 @@
 # Social Media App
 --Author
 This project is developed and maintained by **S.U Ishmam**. 
-You can reach me at [email@example.com](mailto:sahiluddinishmam@gmail.com) or find me on [LinkedIn](https://www.linkedin.com/in/sahil-uddin-ishmam-8707301a3/).
+You can reach me at [sahiluddinishmam@gmail.com](mailto:sahiluddinishmam@gmail.com) or find me on [LinkedIn](https://www.linkedin.com/in/sahil-uddin-ishmam-8707301a3/).
 
 
 
